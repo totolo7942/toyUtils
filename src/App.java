@@ -6,9 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class App {
-    private static List<AItem> items;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         List<AItem> items = new ArrayList<>();
         AItem aItem1 = new AItem("a", "b");
         AItem aItem2 = new AItem("e", "c");
@@ -46,14 +45,12 @@ public class App {
 
     private static List<AItem> merge(final List<AItem> src, List<BItem> dst) {
         //서로 다른 AItem 과 BItem을 원본 AItem과 합친다
-        List<AItem> mergedItems = Stream.concat(
+        return Stream.concat(
                 src.stream(),
                 dst.stream().map(item -> new AItem(item.getKey(), item.getName()))
             )
             .distinct()
             .collect(Collectors.toList());
-
-        return mergedItems;
     }
 
     private static List<AItem> subtract(List<AItem> items, List<BItem> bItems) {
